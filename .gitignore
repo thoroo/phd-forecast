@@ -1,13 +1,14 @@
-# History files
+# RStudio files
 .Rhistory
 .Rapp.history
-
-# Session Data files
 .RData
 .RDataTmp
-
-# User-specific files
 .Ruserdata
+.Rproj.user/
+
+# renv cache
+renv/library/
+renv/staging/
 
 # Example code in package build process
 *-Ex.R
@@ -17,9 +18,6 @@
 
 # Output files from R CMD check
 /*.Rcheck/
-
-# RStudio files
-.Rproj.user/
 
 # produced vignettes
 vignettes/*.html
@@ -47,3 +45,7 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# OS
+.DS_Store
+Thumbs.db
