@@ -1,0 +1,45 @@
+{
+  "language": "English",
+  "title": "PhD Completion Forecast Simulator",
+
+  "person": "Person",
+  "birth_year": "Birth year",
+
+  "status": "Current status",
+  "start_date": "Start date",
+  "today_date": "Current date",
+  "today": "Today",
+
+  "remaining_activity": "Remaining activity (months)",
+
+  "future": "Future assumption",
+  "prolong": "Expected future prolongation (%)",
+
+  "basis": "Remaining time basis",
+  "sem": "Semester checkpoint",
+
+  "compare": "Enable scenario B",
+
+  "requirement": "Program requirement:",
+  "req_text": "48 work months (no prolongation)",
+
+  "save": "Save / Load",
+
+  "forecast": "Projected Completion",
+  "milestones": "Milestones",
+  "stats": "Statistics",
+
+  "scenarioA": "Scenario A",
+  "scenarioB": "Scenario B",
+  "prolongation": "prolongation",
+  "months_remaining": "months remaining",
+  "end": "End",
+  "months": "months",
+  "total_duration": "Total duration",
+
+  "activity_so_far": "Activity so far",
+  "efficiency": "Efficiency",
+  "percent": "%",
+
+  "toggle_lang": "Svenska"
+}

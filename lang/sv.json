@@ -1,0 +1,45 @@
+{
+  "language": "Svenska",
+  "title": "Prognos för doktorandtid",
+
+  "person": "Person",
+  "birth_year": "Födelseår",
+
+  "status": "Nuvarande status",
+  "start_date": "Startdatum",
+  "today_date": "Dagens datum",
+  "today": "Idag",
+
+  "remaining_activity": "Återstående aktivitet (månader)",
+
+  "future": "Antagande framåt",
+  "prolong": "Förväntad framtida förlängning (%)",
+
+  "basis": "Tidsgrund",
+  "sem": "Terminsavstämning",
+
+  "compare": "Aktivera scenario B",
+
+  "requirement": "Programkrav:",
+  "req_text": "48 arbetsmånader (utan förlängning)",
+
+  "save": "Spara / Läs in",
+
+  "forecast": "Beräknat slutdatum",
+  "milestones": "Milstolpar",
+  "stats": "Statistik",
+
+  "scenarioA": "Scenario A",
+  "scenarioB": "Scenario B",
+  "prolongation": "förlängning",
+  "months_remaining": "månader kvar",
+  "end": "Slut",
+  "months": "månader",
+  "total_duration": "Total varaktighet",
+
+  "activity_so_far": "Aktivitet hittills",
+  "efficiency": "Effektivitet",
+  "percent": "%",
+
+  "toggle_lang": "English"
+}
