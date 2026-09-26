@@ -9,6 +9,9 @@
   "start_date": "Startdatum",
   "today_date": "Dagens datum",
   "today": "Idag",
+  "label_start": "Start",
+  "label_today": "Idag",
+  "label_projected_end": "Beräknat slut",
 
   "remaining_activity": "Återstående aktivitet (månader)",
 
@@ -19,6 +22,10 @@
   "sem": "Terminsavstämning",
 
   "compare": "Aktivera scenario B",
+
+  "plot_style": "Figurtyp",
+  "timeline_view": "Tidslinjevy",
+  "activity_view": "Aktivitetsvy",
 
   "requirement": "Programkrav:",
   "req_text": "48 arbetsmånader (utan förlängning)",
@@ -35,11 +42,38 @@
   "months_remaining": "månader kvar",
   "end": "Slut",
   "months": "månader",
+  "hours": "timmar",
   "total_duration": "Total varaktighet",
 
   "activity_so_far": "Aktivitet hittills",
   "efficiency": "Effektivitet",
   "percent": "%",
+  "adjusted_working_hours_per_year": "Justerade arbetstimmar per år",
 
-  "toggle_lang": "English"
+  "tab_average_prolongation": "Genomsnittlig förlängning",
+  "tab_semester_prolongation": "Terminsförlängning",
+  "tab_instructions": "Instruktioner",
+  "tab_changelog": "Ändringslogg",
+
+  "toggle_lang": "English",
+
+  "instructions_title": "Instruktioner",
+  "instructions": [
+    "Ange ditt startdatum och, vid behov, aktivera avancerat läge för att ändra dagens datum.",
+    "Använd fliken Genomsnittlig förlängning för att uppskatta milstolpar med en enda framtida förlängningsprocent.",
+    "Använd fliken Terminsförlängning om du vill ange olika förlängningsvärden för varje termin.",
+    "Välj mellan Tidslinjevy och Aktivitetsvy beroende på om du vill se datum längs en tidslinje eller milstolpar som aktivitetsprocent.",
+    "Aktivera jämförelseläge i avancerade inställningar om du vill jämföra två förlängningsscenarier.",
+    "Se panelerna Milstolpar och Statistik under diagrammet för beräknat resultat.",
+    "Öppna fliken Ändringslogg för att se vad som har ändrats i appen över tid."
+  ],
+  "about_title": "Om",
+  "about": [
+    "Den här appen var framtagen för doktorander på Institutionen för Kostvetenskap på Uppsala universitet",
+    "Målet är att (inofficiellt) uppskatta när doktorandutbildningen kan bli klar utifrån din nuvarande progression och förväntad framtida prolongation.",
+    "Den stöder både en modell med genomsnittlig förlängning och en modell med terminsvisa värden, med både tidslinje- och aktivitetsvy.",
+    "Skapad av: Thomas Roosdorp.",
+    "Källkod och mer information finns på GitHub.",
+    "Om du upptäcker ett fel eller har ett förslag på förbättring, vänligen skapa ett ärende i GitHub-repositoriet."
+  ]
 }

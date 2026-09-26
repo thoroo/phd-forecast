@@ -9,6 +9,9 @@
   "start_date": "Start date",
   "today_date": "Current date",
   "today": "Today",
+  "label_start": "Start",
+  "label_today": "Today",
+  "label_projected_end": "Projected end",
 
   "remaining_activity": "Remaining activity (months)",
 
@@ -19,6 +22,10 @@
   "sem": "Semester checkpoint",
 
   "compare": "Enable scenario B",
+
+  "plot_style": "Plot style",
+  "timeline_view": "Timeline view",
+  "activity_view": "Activity view",
 
   "requirement": "Program requirement:",
   "req_text": "48 work months (no prolongation)",
@@ -35,11 +42,38 @@
   "months_remaining": "months remaining",
   "end": "End",
   "months": "months",
+  "hours": "hours",
   "total_duration": "Total duration",
 
   "activity_so_far": "Activity so far",
   "efficiency": "Efficiency",
   "percent": "%",
+  "adjusted_working_hours_per_year": "Adjusted working hours/year",
 
-  "toggle_lang": "Svenska"
+  "tab_average_prolongation": "Average prolongation",
+  "tab_semester_prolongation": "Semester prolongation",
+  "tab_instructions": "Instructions",
+  "tab_changelog": "Changelog",
+
+  "toggle_lang": "Svenska",
+
+  "instructions_title": "Instructions",
+  "instructions": [
+    "Enter your start date and, if needed, switch to advanced mode to set a different current date.",
+    "Use the Average prolongation tab to estimate milestones using one overall future prolongation percentage.",
+    "Use the Semester prolongation tab if you want to enter different prolongation values for each semester.",
+    "Choose between Timeline view and Activity view depending on whether you want dates along a timeline or activity percentage milestones.",
+    "Enable comparison mode in advanced settings if you want to compare two prolongation scenarios.",
+    "Check the Milestones and Statistics panels below the plot for the calculated output.",
+    "Open the Changelog tab to see what has changed in the app over time."
+  ],
+  "about_title": "About",
+  "about": [
+    "This app was created for doctoral students at the Department of Food Studies, Nutrition, and Dietetics.",
+    "The goal is to (unofficially) calculate doctoral completion timing based on your current progress and expected future prolongation.",
+    "It supports both an average prolongation model and a semester-specific model, with timeline and activity views.",
+    "Created by: Thomas Roosdorp.",
+    "Source code and more information are available on GitHub.",
+    "If you find a bug or have a feature request, please open an issue in the GitHub repository."
+  ]
 }
