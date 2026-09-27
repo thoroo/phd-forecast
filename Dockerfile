@@ -1,12 +1,13 @@
 FROM rocker/geospatial:4.5.2
 
-ARG RENV_PATHS_CACHE=/root/.cache/R/renv
-ENV "RENV_PATHS_CACHE"="${RENV_PATHS_CACHE}"
+ENV RENV_PATHS_CACHE=/home/shiny/.cache/renv
 
 RUN apt-get update -y && apt-get install -y \
     cmake make libuv1-dev libcurl4-openssl-dev libssl-dev pandoc \
     zlib1g-dev libicu-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /home/shiny/.cache/renv && chmod 777 /home/shiny/.cache/renv
 
 RUN mkdir -p /usr/local/lib/R/etc/ /usr/lib/R/etc/
 RUN echo "options(renv.config.pak.enabled = FALSE, repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" | tee /usr/local/lib/R/etc/Rprofile.site | tee /usr/lib/R/etc/Rprofile.site
@@ -25,7 +26,7 @@ RUN R -e 'renv::restore()'
 COPY . .
 
 RUN useradd -r -m -d /home/shiny -s /usr/sbin/nologin shiny \
-    && chown -R shiny:shiny /srv/shiny-server/phd-forecast
+    && chown -R shiny:shiny /home/shiny /srv/shiny-server/phd-forecast
 
 USER shiny
 
