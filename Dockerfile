@@ -1,44 +1,14 @@
-FROM rocker/shiny:4.5.2
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-# System libraries commonly needed by R packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev \
-    libfontconfig1-dev \
-    libharfbuzz-dev \
-    libfribidi-dev \
-    libfreetype6-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libtiff5-dev \
-    libuv1-dev \
-    && rm -rf /var/lib/apt/lists/* 
-
-# Install renv so we can restore the locked environment
-RUN R -e 'install.packages("renv", repos = "https://cloud.r-project.org")'
-
-# Set the working directory where Shiny Server will look for the app
-WORKDIR /srv/shiny-server/phd-forecast
-
-# Copy renv metadata first so Docker can cache package restoration
+FROM rocker/geospatial:4.5.2
+ARG RENV_PATHS_CACHE=/root/.cache/R/renv
+ENV "RENV_PATHS_CACHE"="${RENV_PATHS_CACHE}"
+RUN apt-get update -y && apt-get install -y  cmake make libuv1-dev libcurl4-openssl-dev libssl-dev pandoc zlib1g-dev libicu-dev && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /usr/local/lib/R/etc/ /usr/lib/R/etc/
+RUN echo "options(renv.config.pak.enabled = FALSE, repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" | tee /usr/local/lib/R/etc/Rprofile.site | tee /usr/lib/R/etc/Rprofile.site
+RUN R -e 'install.packages("remotes")'
+RUN R -e 'remotes::install_version("renv", version = "1.0.9")'
 COPY renv.lock renv.lock
-COPY renv/ renv/
-COPY .Rprofile .Rprofile
-
-# Restore the R environment defined by renv.lock
-RUN R -e 'renv::restore()'
-
-# Copy the actual app files
-COPY . .
-
-# Ensure the shiny user can read everything
-RUN chown -R shiny:shiny /srv/shiny-server/phd-forecast
-
-# Shiny Server listens on 3838
+RUN --mount=type=cache,id=renv-cache,target=${RENV_PATHS_CACHE} R -e 'renv::restore()'
+WORKDIR /srv/shiny-server/
+COPY . /srv/shiny-server/
 EXPOSE 3838
-
-# Start Shiny Server
-CMD ["/usr/bin/shiny-server"]
+CMD R -e 'shiny::runApp("/srv/shiny-server",host="0.0.0.0",port=3838)'
