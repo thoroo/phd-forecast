@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     libjpeg-dev \
     libtiff5-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libuv1-dev \
+    && rm -rf /var/lib/apt/lists/* 
 
 # Install renv so we can restore the locked environment
 RUN R -e 'install.packages("renv", repos = "https://cloud.r-project.org")'
