@@ -28,6 +28,7 @@ This app helps you:
 - Scenario exploration without modifying underlying data  
 - Multilingual interface (via JSON language files)  
 - Fully reproducible environment using `renv`
+- Docker-based deployment
 
 ---
 
@@ -50,6 +51,13 @@ Always consult your department (e.g. Head of department or Director of studies t
 
 All R dependencies are managed using `renv`, ensuring reproducibility.
 
+### For Docker execution
+
+- Docker Engine
+- Docker Compose plugin
+
+No local R installation is required when running the app in Docker.
+
 ---
 
 ## Running locally (RStudio)
@@ -58,12 +66,64 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/thoroo/phd-forecast.git
-cd phd-forecast
 ```
 
+Open the project in RStudio or start R in the project directory, then restore the environment:
+
 ```r
-install.packages("")
+install.packages("renv")
+renv::restore()
 ```
+
+Run the app:
+
+```r
+shiny::runApp()
+```
+
+## Running with Docker
+
+If you prefer to self-host the app in a container, Docker is the recommended deployment method.
+
+Build the image:
+
+```sh
+docker build -t phd-forecast .
+```
+
+Run the container:
+
+```sh
+docker run -p 3838:3838 --name phd-forecast --restart unless-stopped phd-forecast
+```
+
+Then open:
+
+`http://localhost:3838`
+
+## Running with Docker Compose
+
+You can also use Docker Compose for easier lifecycle management:
+
+```sh
+docker compose up -d --build
+```
+
+To stop the app:
+
+```sh
+docker compose down
+```
+
+## Notes on Docker deployment
+
+This repository includes:
+
+- `Dockerfile` for building the image
+- `.dockerignore` to keep builds clean and efficient
+- `renv.lock` for reproducible package versions
+
+The Docker image uses the app’s locked R package environment and is intended to make deployment more consistent across hosts.
 
 ## Limitations
 

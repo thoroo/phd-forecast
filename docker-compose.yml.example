@@ -1,0 +1,7 @@
+services:
+  phd-forecast:
+    build: .
+    container_name: phd-forecast
+    ports:
+      - "3838:3838"
+    restart: unless-stopped
