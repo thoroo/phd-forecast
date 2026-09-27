@@ -20,7 +20,7 @@ COPY renv.lock renv.lock
 COPY renv/ renv/
 COPY .Rprofile .Rprofile
 
-RUN --mount=type=cache,id=renv-cache,target=${RENV_PATHS_CACHE} R -e 'renv::restore()'
+RUN R -e 'renv::restore()'
 
 COPY . .
 
