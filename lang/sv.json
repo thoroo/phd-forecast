@@ -41,6 +41,7 @@
   "prolongation": "förlängning",
   "months_remaining": "månader kvar",
   "end": "Slut",
+  "years": "år",
   "months": "månader",
   "hours": "timmar",
   "total_duration": "Total varaktighet",
@@ -54,6 +55,7 @@
   "tab_semester_prolongation": "Terminsförlängning",
   "tab_instructions": "Instruktioner",
   "tab_changelog": "Ändringslogg",
+  "tab_about": "Om",
 
   "toggle_lang": "English",
 

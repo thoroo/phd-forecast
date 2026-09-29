@@ -41,6 +41,7 @@
   "prolongation": "prolongation",
   "months_remaining": "months remaining",
   "end": "End",
+  "years": "years",
   "months": "months",
   "hours": "hours",
   "total_duration": "Total duration",
@@ -54,6 +55,7 @@
   "tab_semester_prolongation": "Semester prolongation",
   "tab_instructions": "Instructions",
   "tab_changelog": "Changelog",
+  "tab_about": "About",
 
   "toggle_lang": "Svenska",
 
