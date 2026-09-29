@@ -653,16 +653,15 @@ server <- function(input, output, session) {
       yEndA <- y_A
       
       marksA <- data.frame(
-        label = c("Start", "Today", "50%", "80%", tr(Ls, "end", "End"), format(ref_end, "%Y-%m-%d"), format(endA, "%Y-%m-%d")),
-        date  = c(start, today, m50A, m80A, mEndA, ref_end, endA),
+        label = c("Start", "Today", "50%", "80%", tr(Ls, "end", "End"), format(ref_end, "%Y-%m-%d")),
+        date  = c(start, today, m50A, m80A, mEndA, ref_end),
         y     = c(
           y_nom,
           scenario_y_path(today, today, endA, y_A),
           y50A,
           y80A,
           yEndA,
-          y_nom,
-          yEndA
+          y_nom
         ),
         stringsAsFactors = FALSE
       )
