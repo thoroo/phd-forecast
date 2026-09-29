@@ -501,11 +501,7 @@ server <- function(input, output, session) {
   })
   
   output$instructions_ui <- renderUI({
-    Ls <- L()
-    tagList(
-      h3(tr(Ls, "instructions_title", "Instructions")),
-      tags$ul(lapply(Ls$instructions, function(x) tags$li(x)))
-    )
+    includeMarkdown("./lang/en_instructions.md")
   })
   
   output$changelog_ui <- renderUI({
