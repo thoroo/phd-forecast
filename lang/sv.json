@@ -12,6 +12,18 @@
   "label_start": "Start",
   "label_today": "Idag",
   "label_projected_end": "Beräknat slut",
+  "pct_50": "50%",
+  "pct_80": "80%",
+  "pct_100": "100%",
+  "not_reached": "nåddes inte",
+  "projected_completion": "Beräknad slutföring",
+  "time_remaining": "Återstående tid",
+  "not_reached_within_horizon": "nåddes inte inom simulerat intervall",
+  "unavailable": "inte tillgänglig",
+  "projected_final_activity": "Beräknad slutaktivitet",
+  "semester_inputs": "Terminsindata",
+  "estimated_completion": "Beräknad slutföring",
+  "semester_forecast": "Terminspecifik prognos",
 
   "remaining_activity": "Återstående aktivitet (månader)",
 
@@ -43,6 +55,7 @@
   "end": "Slut",
   "years": "år",
   "months": "månader",
+  "days": "dagar",
   "hours": "timmar",
   "total_duration": "Total varaktighet",
 

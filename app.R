@@ -99,7 +99,7 @@ work_to_pct <- function(work) {
   100 * work / required_work
 }
 
-format_duration_ymd <- function(from, to) {
+format_duration_ymd <- function(Ls, from, to) {
   from <- safe_date(from)
   to   <- safe_date(to)
   if (is.na(from) || is.na(to) || to <= from) return("0 months")
@@ -111,9 +111,16 @@ format_duration_ymd <- function(from, to) {
   days   <- round(rem - months * 30.44)
   
   if (years > 0) {
-    paste0(years, " years, ", months, " months, ", days, " days")
+    paste0(
+      years, " ", tr(Ls, "years", "years"), ", ",
+      months, " ", tr(Ls, "months", "months"), ", ",
+      days, " ", tr(Ls, "days", "days")
+    )
   } else {
-    paste0(months, " months, ", days, " days")
+    paste0(
+      months, " ", tr(Ls, "months", "months"), ", ",
+      days, " ", tr(Ls, "days", "days")
+    )
   }
 }
 
@@ -382,12 +389,12 @@ server <- function(input, output, session) {
             fluidRow(
               column(
                 6,
-                h4("Milestones"),
+                h4(tr(Ls, "milestones", "Milestones")),
                 verbatimTextOutput("milestone_text_sem")
               ),
               column(
                 6,
-                h4("Statistics"),
+                h4(tr(Ls, "stats", "Statistics")),
                 verbatimTextOutput("stats_text_sem")
               )
             ),
@@ -421,7 +428,7 @@ server <- function(input, output, session) {
   })
   
   output$forecast_title   <- renderUI({ Ls <- L(); h3(tr(Ls, "forecast", "Projected Completion")) })
-  output$forecast_title_sem <- renderUI({ h3("Semester-specific projection") })
+  output$forecast_title_sem <- renderUI({ Ls <- L(); h3(tr(Ls, "semester_forecast", "Semester-specific projection")) })
   output$milestones_title <- renderUI({ Ls <- L(); h4(tr(Ls, "milestones", "Milestones")) })
   output$stats_title      <- renderUI({ Ls <- L(); h4(tr(Ls, "stats", "Statistics")) })
   
@@ -772,9 +779,9 @@ server <- function(input, output, session) {
     m80A  <- milestone_date_model(start, today, done, elapsed, pA, 0.8 * required_work)
     mEndA <- milestone_date_model(start, today, done, elapsed, pA, required_work)
     
-    dur50A  <- format_duration_ymd(today, m50A)
-    dur80A  <- format_duration_ymd(today, m80A)
-    durEndA <- format_duration_ymd(today, mEndA)
+    dur50A  <- format_duration_ymd(Ls, today, m50A)
+    dur80A  <- format_duration_ymd(Ls, today, m80A)
+    durEndA <- format_duration_ymd(Ls, today, mEndA)
     
     end_label <- tr(Ls, "end", "End")
     
@@ -791,9 +798,9 @@ server <- function(input, output, session) {
     m80B  <- milestone_date_model(start, today, done, elapsed, pB, 0.8 * required_work)
     mEndB <- milestone_date_model(start, today, done, elapsed, pB, required_work)
     
-    dur50B  <- format_duration_ymd(today, m50B)
-    dur80B  <- format_duration_ymd(today, m80B)
-    durEndB <- format_duration_ymd(today, mEndB)
+    dur50B  <- format_duration_ymd(Ls, today, m50B)
+    dur80B  <- format_duration_ymd(Ls, today, m80B)
+    durEndB <- format_duration_ymd(Ls, today, mEndB)
     
     paste0(
       "Scenario A (", pA, "% prolongation)\n",
@@ -856,6 +863,7 @@ server <- function(input, output, session) {
   })
   
   output$milestone_text_sem <- renderText({
+    Ls <- L()
     start <- safe_date(input$start_sem)
     today <- Sys.Date()
     req(!is.na(start))
@@ -883,15 +891,20 @@ server <- function(input, output, session) {
     pct100_date <- sim$end_date
     
     paste0(
-      "Start: ", format(start, "%Y-%m-%d"), "\n",
-      "Today: ", format(today, "%Y-%m-%d"), "\n",
-      "50%: ", ifelse(is.na(pct50_date), "not reached", format(pct50_date, "%Y-%m-%d")), "\n",
-      "80%: ", ifelse(is.na(pct80_date), "not reached", format(pct80_date, "%Y-%m-%d")), "\n",
-      "100%: ", ifelse(is.na(pct100_date), "not reached", format(pct100_date, "%Y-%m-%d"))
+      tr(Ls, "label_start", "Start"), ": ", format(start, "%Y-%m-%d"), "
+",
+      tr(Ls, "label_today", "Today"), ": ", format(today, "%Y-%m-%d"), "
+",
+      tr(Ls, "pct_50", "50%"), ": ", ifelse(is.na(pct50_date), tr(Ls, "not_reached", "not reached"), format(pct50_date, "%Y-%m-%d")), "
+",
+      tr(Ls, "pct_80", "80%"), ": ", ifelse(is.na(pct80_date), tr(Ls, "not_reached", "not reached"), format(pct80_date, "%Y-%m-%d")), "
+",
+      tr(Ls, "pct_100", "100%"), ": ", ifelse(is.na(pct100_date), tr(Ls, "not_reached", "not reached"), format(pct100_date, "%Y-%m-%d"))
     )
   })
   
   output$stats_text_sem <- renderText({
+    Ls <- L()
     m <- semester_metrics()
     path <- m$path
     today <- m$today
@@ -911,14 +924,18 @@ server <- function(input, output, session) {
     end_activity <- if (!is.na(sim$end_date)) 100 else tail(path$activity, 1)
     
     paste0(
-      "Activity so far: ", round(current_activity, 2), "%\n",
-      "Projected final activity: ", round(end_activity, 2), "%\n",
-      "Semester inputs: ", paste(m$prolong_vec, collapse = ", "), "\n",
-      "Estimated completion: ", ifelse(is.na(sim$end_date), "unavailable", format(sim$end_date, "%Y-%m-%d"))
+      tr(Ls, "activity_so_far", "Activity so far"), ": ", round(current_activity, 2), "%
+",
+      tr(Ls, "projected_final_activity", "Projected final activity"), ": ", round(end_activity, 2), "%
+",
+      tr(Ls, "semester_inputs", "Semester inputs"), ": ", paste(m$prolong_vec, collapse = ", "), "
+",
+      tr(Ls, "estimated_completion", "Estimated completion"), ": ", ifelse(is.na(sim$end_date), tr(Ls, "unavailable", "unavailable"), format(sim$end_date, "%Y-%m-%d"))
     )
   })
   
   output$timeline_plot_sem <- renderPlotly({
+    Ls <- L()
     start <- safe_date(input$start_sem)
     today <- Sys.Date()
     req(!is.na(start))
@@ -1005,21 +1022,21 @@ server <- function(input, output, session) {
       )
       
       milestone_list <- list(
-        data.frame(label = "Start", date = start, activity = 0, stringsAsFactors = FALSE),
-        data.frame(label = "Today", date = today, activity = today_activity, stringsAsFactors = FALSE)
+        data.frame(label = tr(Ls, "label_start", "Start"), date = start, activity = 0, stringsAsFactors = FALSE),
+        data.frame(label = tr(Ls, "label_today", "Today"), date = today, activity = today_activity, stringsAsFactors = FALSE)
       )
       
       if (!is.na(pct50_date)) {
         milestone_list[[length(milestone_list) + 1]] <-
-          data.frame(label = "50%", date = pct50_date, activity = 50, stringsAsFactors = FALSE)
+          data.frame(label = tr(Ls, "pct_50", "50%"), date = pct50_date, activity = 50, stringsAsFactors = FALSE)
       }
       if (!is.na(pct80_date)) {
         milestone_list[[length(milestone_list) + 1]] <-
-          data.frame(label = "80%", date = pct80_date, activity = 80, stringsAsFactors = FALSE)
+          data.frame(label = tr(Ls, "pct_80", "80%"), date = pct80_date, activity = 80, stringsAsFactors = FALSE)
       }
       if (!is.na(pct100_date)) {
         milestone_list[[length(milestone_list) + 1]] <-
-          data.frame(label = "100%", date = pct100_date, activity = 100, stringsAsFactors = FALSE)
+          data.frame(label = tr(Ls, "pct_100", "100%"), date = pct100_date, activity = 100, stringsAsFactors = FALSE)
       }
       
       marks <- do.call(rbind, milestone_list)
@@ -1088,7 +1105,7 @@ server <- function(input, output, session) {
       semester_points$text <- paste0(semester_points$label, ": ", format(semester_points$date, "%Y-%m-%d"))
       
       milestone_dates <- c(pct50_date, pct80_date, pct100_date)
-      milestone_labels <- c("50%", "80%", "100%")
+      milestone_labels <- c(tr(Ls, "pct_50", "50%"), tr(Ls, "pct_80", "80%"), tr(Ls, "pct_100", "100%"))
       valid <- !is.na(milestone_dates)
       
       milestone_df <- data.frame(
@@ -1145,22 +1162,27 @@ server <- function(input, output, session) {
   })
   
   output$summary_sem <- renderText({
+    Ls <- L()
     m <- semester_metrics()
     sim <- m$sim
     today <- m$today
     
     if (is.na(sim$end_date)) {
       return(paste0(
-        "Today: ", format(today, "%Y-%m-%d"), "\n",
-        "Projected completion: not reached within simulated horizon\n",
-        "Time remaining: unavailable"
+      tr(Ls, "label_today", "Today"), ": ", format(today, "%Y-%m-%d"), "
+",
+        tr(Ls, "projected_completion", "Projected completion"), ": ", tr(Ls, "not_reached_within_horizon", "not reached within simulated horizon"), "
+",
+        tr(Ls, "time_remaining", "Time remaining"), ": ", tr(Ls, "unavailable", "unavailable")
       ))
     }
     
     paste0(
-      "Today: ", format(today, "%Y-%m-%d"), "\n",
-      "Projected completion: ", format(sim$end_date, "%Y-%m-%d"), "\n",
-      "Time remaining: ", format_duration_ymd(today, sim$end_date)
+      tr(Ls, "label_today", "Today"), ": ", format(today, "%Y-%m-%d"), "
+",
+      tr(Ls, "projected_completion", "Projected completion"), ": ", format(sim$end_date, "%Y-%m-%d"), "
+",
+      tr(Ls, "time_remaining", "Time remaining"), ": ", format_duration_ymd(Ls, today, sim$end_date)
     )
   })
 }

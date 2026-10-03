@@ -12,6 +12,18 @@
   "label_start": "Start",
   "label_today": "Today",
   "label_projected_end": "Projected end",
+  "pct_50": "50%",
+  "pct_80": "80%",
+  "pct_100": "100%",
+  "not_reached": "not reached",
+  "projected_completion": "Projected completion",
+  "time_remaining": "Time remaining",
+  "not_reached_within_horizon": "not reached within simulated horizon",
+  "unavailable": "unavailable",
+  "projected_final_activity": "Projected final activity",
+  "semester_inputs": "Semester inputs",
+  "estimated_completion": "Estimated completion",
+  "semester_forecast": "Semester-specific projection",
 
   "remaining_activity": "Remaining activity (months)",
 
@@ -43,6 +55,7 @@
   "end": "End",
   "years": "years",
   "months": "months",
+  "days": "days",
   "hours": "hours",
   "total_duration": "Total duration",
 
@@ -56,6 +69,7 @@
   "tab_instructions": "Instructions",
   "tab_changelog": "Changelog",
   "tab_about": "About",
+  "semester_forecast": "Semester-specific projection",
 
   "toggle_lang": "Svenska",
 
