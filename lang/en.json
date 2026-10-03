@@ -12,6 +12,8 @@
   "label_start": "Start",
   "label_today": "Today",
   "label_projected_end": "Projected end",
+  "spring": "Spring",
+  "fall": "Fall",
   "pct_50": "50%",
   "pct_80": "80%",
   "pct_100": "100%",
@@ -24,6 +26,8 @@
   "semester_inputs": "Semester inputs",
   "estimated_completion": "Estimated completion",
   "semester_forecast": "Semester-specific projection",
+  "prolongation_per_semester": "Prolongation per semester (%)",
+  "semester": "Semester",
 
   "remaining_activity": "Remaining activity (months)",
 

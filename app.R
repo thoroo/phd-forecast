@@ -124,11 +124,11 @@ format_duration_ymd <- function(Ls, from, to) {
   }
 }
 
-semester_label <- function(date) {
+semester_label <- function(date, Ls) {
   date <- safe_date(date)
   if (is.na(date)) return(NA_character_)
   y <- year(date)
-  if (month(date) <= 6) paste0("Spring ", y) else paste0("Fall ", y)
+  if (month(date) <= 6) paste0(tr(Ls, "spring", "Spring"), " ", y) else paste0(tr(Ls, "fall", "Fall"), " ", y)
 }
 
 milestone_date_model <- function(start, today, completed_today, elapsed_months,
@@ -493,11 +493,11 @@ server <- function(input, output, session) {
         selected = "timeline",
         inline = TRUE
       ),
-      h4("Prolongation per semester (%)"),
+      h4(tr(Ls, "prolongation_per_semester", "Prolongation per semester (%)")),
       lapply(1:8, function(i) {
         numericInput(
           inputId = paste0("sem_p_", i),
-          label   = paste("Semester", i),
+          label   = paste(tr(Ls, "semester", "Semester"), i),
           value   = 0,
           min     = 0,
           max     = 100,
@@ -508,7 +508,7 @@ server <- function(input, output, session) {
   })
   
   output$instructions_ui <- renderUI({
-    includeMarkdown("./lang/en_instructions.md")
+    includeMarkdown(file.path("lang", paste0(lang_code(), "_instructions.md")))
   })
   
   output$changelog_ui <- renderUI({
@@ -998,7 +998,7 @@ server <- function(input, output, session) {
     pct100_date <- sim$end_date
     
     semester_dates <- path$date[-1]
-    semester_labels <- sapply(semester_dates, semester_label)
+    semester_labels <- sapply(semester_dates, semester_label, Ls = Ls)
     
     if (identical(input$sem_plot_mode, "activity")) {
       
