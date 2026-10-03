@@ -1,6 +1,21 @@
 # Changelog
 
+## 0.2.0
+2026-10-03
+
+Mainly updated translation keys, as well as R and renv.
+
+Updated:
+- R 4.5.2 to R 4.6.1
+- renv 1.0.9 to 1.3.0
+- Updated instructions with clearer meaning and formatting
+- About tab uses markdown
+
+Removed:
+- renv env in .Rprofile as it is already defined in the Dockerfile
+
 ## 0.1.0
+2026-09-26
 
 Introduced initial app functionality.
 
