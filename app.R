@@ -509,11 +509,7 @@ server <- function(input, output, session) {
   })
   
   output$about_ui <- renderUI({
-    Ls <- L()
-    tagList(
-      h3(tr(Ls, "about_title", "About")),
-      tags$ul(lapply(Ls$about, function(x) tags$li(x)))
-    )
+    includeMarkdown("ABOUT.md")
   })
   
   output$timeline_plot <- renderPlotly({
