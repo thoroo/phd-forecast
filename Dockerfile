@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.5.2
+FROM rocker/geospatial:4.6.1
 
 ENV RENV_PATHS_CACHE=/home/shiny/.cache/renv
 
@@ -13,7 +13,7 @@ RUN mkdir -p /usr/local/lib/R/etc/ /usr/lib/R/etc/
 RUN echo "options(renv.config.pak.enabled = FALSE, repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" | tee /usr/local/lib/R/etc/Rprofile.site | tee /usr/lib/R/etc/Rprofile.site
 
 RUN R -e 'install.packages("remotes")'
-RUN R -e 'remotes::install_version("renv", version = "1.0.9")'
+RUN R -e 'remotes::install_version("renv", version = "1.3.0")'
 
 WORKDIR /srv/shiny-server/phd-forecast
 
